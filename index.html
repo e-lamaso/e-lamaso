@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<title>e-LAMASO Siswa</title>
+<!-- LOGO FAVICON -->
+<link
+	href="https://1.bp.blogspot.com/-q57d59JTX8g/Xa-kAy6T0XI/AAAAAAAAOSo/seM01RU3Q_Q7BvLm73wC09BBsQMs05pYACLcBGAsYHQ/s320/LOGO%2BLAMASO.png"
+	rel="shortcut icon" type="image/x-icon" />
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- <link rel="stylesheet" href="https://sdnratujaya1.github.io/e-lamaso/style_lamaso.css"> -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" type="text/javascript"/></script>  -->
+
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' type='text/javascript'></script>
+	<link rel="stylesheet" href="css_siswa.css">
+
+	<!-- <script type='text/x-mathjax-config'>   MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}}); 
+	</script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+		type='text/javascript'> </script> -->
+
+
+</head>
+
+<body>
+	<!-- Top container -->
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+		<button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+			onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+		<span class="w3-bar-item w3-right">e-Lamaso Siswa</span>
+	</div>
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+		title="close side menu" id="myOverlay"></div>
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+		<div class="w3-container w3-row">
+			<div class="w3-col s4">
+				<!-- LOGO SEKOLAH -->
+				<img id="logosekolahmenu" class="w3-circle w3-margin-right"
+					style="width:90px;height:90px;border:1px solid blue">
+				<!-- SELESAI LOGO SEKOLAH -->
+			</div>
+			<div class="w3-col s8 w3-bar">
+				<span><strong id="namasekolah"></strong></span><br /><strong id="namakota"></strong><br /><span
+					id="tapel">(2020/2021)</span>
+			</div>
+			<hr>
+			<div class="w3-container">
+				<h5>Menu e-Lamaso</h5>
+			</div>
+			<div class="w3-bar-block" id="barlogin">
+				<a href="#" class="w3-bar-item w3-button w3-padding" onclick="barloginelamaso()"><i
+						class="fa fa-sign-in"></i>  Login</a>
+				<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+					onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Tutup Menu</a>
+			</div>
+			<div class="w3-bar-block" id="barsiswa">
+				<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-id-card-o fa-fw"></i>  Data
+					Saya</a>
+				<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clock-o fa-fw"></i>  Nilai Saya</a>
+				<a href="#" class="w3-bar-item w3-button w3-padding" onclick="logout()"><i class="fa fa-sign-out"></i> 
+					Logout</a>
+				<a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+					onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Tutup Menu</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="w3-main" style="margin-left:300px;margin-top:43px;" id="mainlogin">
+		<hr />
+		<h2 class="w3-center">Selamat Datang </h2>
+		<div class="w3-center">
+			<img src="https://1.bp.blogspot.com/-q57d59JTX8g/Xa-kAy6T0XI/AAAAAAAAOSo/seM01RU3Q_Q7BvLm73wC09BBsQMs05pYACLcBGAsYHQ/s320/LOGO%2BLAMASO.png"
+				style="width:145px;border:2px dotted blue;margin:auto" />
+			<br />
+			Token/Sandi:<br /><input type="text" id="previewtoken"
+				style="border:1px solid blue;width:50%;border-radius:5px" />
+			<br /><br />
+			<button id="mulaimulai" onclick="kliklamaso()"
+				style="cursor:pointer;border:1px solid yellow;border-radius:15px;padding:5px;background-color:navy;color:yellow;margin:0px auto"
+				title="klik Untuk Memulai">e-Lamaso Siswa</button><br />
+			<div id="cek"></div>
+		</div>
+		<div id="datauser" style="display:none;overflow-x: auto;">tess</div>
+
+	</div>
+	<div class="w3-main" style="margin-left:300px;margin-top:43px;" id="kontenLamaso">
+		<div class="w3-center" id="previewlogohp">
+			<br />
+			<img src="https://1.bp.blogspot.com/-wWPZEohYj_k/Xe_ZUEPgB3I/AAAAAAAAOgY/7idyYLxlmqgwHo6TJ9QQK0sC_MQgmBXrwCLcBGAsYHQ/s1600/logo%2Blamaso.jpg"
+				class="w3-circle" style="width:145px;border:2px dotted red" />
+
+			<h2>e-Lamaso Siswa</h2>
+		</div>
+		<span style="display:none" id="keyidSekolah">SDN Ratujaya 1</span>
+		<span style="display:none" id="keyidToken">Kelas</span>
+		<span style="display:none" id="keykelas">Kelas</span>
+		<span style="display:none" id="keysekolah">Sekolah</span>
+		<span style="display:none" id="keymapel">Mapel</span>
+		<span style="display:none" id="keyaksessiswa">Akses</span>
+		<span style="display:none" id="keypublikasi">Tgl Publikasi</span>
+		<span style="display:none" id="keydurasi">durasi</span>
+		<span style="display:none" id="keyidmateri">idmateri</span>
+		<span style="display:none" id="tttkeybase">keybase</span>
+
+
+		<div style="padding:5px" id="identitastoken">
+			<div id="previewloginsiswa"
+				style="width:80%;margin:auto;border:1px solid blue;border-radius:15px;padding:5px;background-color:#eee">
+				Mapel/Tema <sup>(dari kode token)</sup>:
+				<div id="hasiltoken" style="border:1px solid blue;width:90%;padding:1px;background-color:white"></div>
+				Pilih Sekolah:<br />
+				<select id="previewpilihsekolah" style="border:1px solid blue;width:90%">
+					<option value="SDN Ratujaya 1" selected>SDN Ratujaya 1</option>
+				</select><br />
+				Piih Kelas:<br />
+				<select id="previewpilihkelas" style="border:1px solid blue;width:50px">
+				</select><br />
+				<div id="generateopsinama">
+					Nama Siswa:<br />
+					<select id="previewpilihnama" onchange="aksessekalidijson()"
+						style="border:1px solid blue;width:90%">
+					</select><br />
+					<span id="cekkerjaansiswa"></span>
+				</div>
+				<button class="wa" id="buatopsinama">Tampilkan Nama Kelas</button>
+				<button onclick="mulaibelajar()" id="timermulai" class="wa">Mulai </button>
+			</div>
+			<div id="tes"></div>
+
+			<div id="materiimport" style="padding:5px;text-align:justify">
+				DI SINI AKAN MUNCUL teks html dari upload file notepad
+			</div>
+			<div id="hasilbelajarsekali">
+				<div id="tescekelement">tes cek element</div>
+			</div>
+			<!-- <button onclick="cektugasdansoal()">cek jumlah opsi</button> -->
+
+			<!-- <button onclick="tambahtombolisijawaban()">Tambah Tombol</button>
+					<button onclick="ceknilai()">cek koleksi ceklis opsi PG</button>
+					<button onclick="hasilakhirelamaso()">hasilakhirelamaso()</button>
+					
+					<div id="cektagihan"></div> -->
+
+			<div id="hasilakhir">
+				<div id="fromHTMLtestdiv">
+
+					<div id="borderidhasilakhirnama">
+						<center>
+							<img src="https://1.bp.blogspot.com/-wWPZEohYj_k/Xe_ZUEPgB3I/AAAAAAAAOgY/7idyYLxlmqgwHo6TJ9QQK0sC_MQgmBXrwCLcBGAsYHQ/s1600/logo%2Blamaso.jpg"
+								class="w3-circle" style="width:145px;border:2px dotted red" />
+							<h3>Nilai Belajar</h3>
+
+							<table class="versi-table" id="tabelku">
+								<tr>
+									<td>Sekolah </td>
+									<td id="hasilakhirnamasekolah">: Nama Sekolah </td>
+								</tr>
+								<tr>
+									<td>Nama </td>
+									<td id="hasilakhirnamasiswa">: Nama Siswa</td>
+								</tr>
+								<tr>
+									<td>Kelas </td>
+									<td id="hasilakhirkelas">: Kelas </td>
+								</tr>
+								<tr>
+									<td>Mapel/Tema </td>
+									<td id="hasilakhirmapeltema">: Mapel/Tema</td>
+								</tr>
+								<tr>
+									<td>Waktu Selesai </td>
+									<td id="hasilakhirwaktu">: Waktu/</td>
+								</tr>
+							</table>
+						</center>
+						<div id="resumenilai">
+
+						</div>
+						<div id="resumenilaiskhir">
+
+						</div>
+
+					</div>
+					<p id="bypassme" style="color:red;text-align:center">Simpan hasil nilai ini dalam bentuk pdf untuk
+						bukti belajarmu
+					</p><br />
+				</div>
+				<center>
+					<button id="cmd" class="button">Simpan Pdf</button>
+					<!-- <button id="filenilai" onclick="htmlnilaisiswa()" class="button">Mau dibikin html</button> -->
+				</center>
+			</div>
+			<form id="kirimnilaielamaso" name="kirimnilaielamaso" style="display:none">
+				<div id="tempatinputidentitashasilbelajar">Tempat Input Pilihan Ganda</div>
+				<div id="tempatinputpilihanganda">Tempat Input Pilihan Ganda</div>
+				<div id="tempatinputjawabanessay">Tempat Input Essay</div>
+				<textarea id="tekshtmlnilai" name="tekshtmlnilai">
+borderhasilnama
+</textarea>
+				<button type="submit">Kirim Tes</button>
+			</form>
+			<!-- <button onclick="teskirimjson()">TEs cara lain</button>	 -->
+
+			<!-- START COPY CODE -->
+
+			<!-- END COPY CODE -->
+		</div>
+
+	</div>
+
+	<script id="rendered-js" src="src/renderpdf.js"></script>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js">
+	</script>
+	<script src="elamasosiswa.js"></script>
+
+</body>
+
+</html>
