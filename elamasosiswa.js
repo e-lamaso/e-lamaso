@@ -785,6 +785,7 @@ function tambahtombolisijawaban() {
 function ceknilai() {
     //
     tempatinputpilihanganda.innerHTML = "Nama Sekolah: <input name='idsekolah' id='kirimidsekolah' type='text' value='" + keyidSekolah.innerHTML + "'/><br/>";
+    tempatinputpilihanganda.innerHTML += "emailguru: <input name='emailguru' id='emailguru' type='text' value='" + keyidemail.innerHTML + "'/><br/>";
     tempatinputpilihanganda.innerHTML += "Nama Kelas : <input name='idkelas' id='kirimidkelas' type='text' value='" + keykelas.innerHTML + "'/><br/>";
     tempatinputpilihanganda.innerHTML += "Mapel : <input name='idmapel' id='kirimidmapel' type='text' value='" + keymapel.innerHTML + "'/><br/>";
     tempatinputpilihanganda.innerHTML += "Token : <input name='idtoken' id='kirimidtoken' type='text' value='" + keyidToken.innerHTML + "'/><br/>";
@@ -1747,7 +1748,7 @@ function kliklamaso() {
     materiimport.style.display = "none";
     var adatidak;
     var Tidkelas, Tidmapel, TcrtToken, Taksessiswa, Tdurasi,
-        Tidmateri, Tidtoken, Tidsekolah
+        Tidmateri, Tidtoken, Tidsekolah, Temail
     if (previewtoken.value.indexOf("A") == -1) {
         //Panggil data dari SpreadSheet tugasguru
         var url = script_url + "?action=riwayatmateri";
@@ -1914,6 +1915,7 @@ function kliklamaso() {
                 var inputtoken = document.getElementById("previewtoken").value.split("A");
                 var brs = inputtoken[0] - 1;
                 var idnpsiswa = sumbertabel.rows[brs].cells[17].innerHTML;
+                keyidemail.innerHTML = sumbertabel.rows[brs].cells[3].innerHTML;
 
                 buatopsinama.setAttribute("onclick", "datasiswalain('" + idnpsiswa + "')");
 
