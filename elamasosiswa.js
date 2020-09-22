@@ -1215,6 +1215,7 @@ function aksessekalidijson() {
                 if (json.records[a].idtoken == kodetoken && json.records[a].idkelas == kodekelas && json.records[a].idmapel == kodemapel && json.records[a].namasiswa == kodenamasiswa) {
                     cek = "Sudah";
                     waktu = json.records[a].Time_Stamp;
+                    break;
                 } else {
                     cek = "Belum"
                     waktu = ""
