@@ -1376,8 +1376,11 @@ function brkline(teks) { //coba
             var arpgg = asal.replace("_OPSI-PG_", ""); // hasilnya: 1A teks pertanyaan bla bla bla
             var arpg = arpgg.split(" "); //hasilnya: 0=1A 1=teks 2=pertanyaan ... dst.
             var idopsi = arpg[0]; // hasilnya: 1A
-            var abjad = idopsi.slice(1, 2); // hasilnya A
-            var nosoal = idopsi.slice(0, 1); // hasilnya 1
+            //var abjad = idopsi.slice(1, 2); // hasilnya A
+            //var nosoal = idopsi.slice(0, 1); // hasilnya 1
+             var nosoal = parseInt(idopsi);
+            var abjad = idopsi.replace(nosoal, "");
+            
             if (abjad === "A") {
                 opsipg += "<hr style='border-top:1px solid olive'/>";
                 opsipg += "<ol style='list-style-type:upper-alpha;margin:5px 5px 0px 20px;padding:0' ><li><input class='calc' type='radio' style='display:none' name='soal" + nosoal + "' id='" + idopsi + "'/><label class='opsi' for='" + idopsi + "'>"; // Khusus opsi A, ada elemen OL lalu dilanjut teksnya
