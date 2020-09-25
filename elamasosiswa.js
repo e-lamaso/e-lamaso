@@ -16,7 +16,8 @@ $(document).ready(function () {
     kontenLamaso.style.display = "none";
     hasilbelajarsekali.style.display = "none";
     hasilakhir.style.display = "none";
-    divdaftarnilai.style.display = "none"
+    divdaftarnilai.style.display = "none";
+
 
     var hcpt = document.getElementById("hakcipta");
     if (hcpt == null) {
@@ -36,7 +37,7 @@ $(document).ready(function () {
         var an = document.createElement("a");
         an.setAttribute("href", "https://www.sdnratujaya1.net/");
         an.setAttribute("target", "_blank");
-        an.innerHTML = "Web Sekolaku";
+        an.innerHTML = "Web Sekolah";
         hcpt.appendChild(an);
 
         //\r\n Kunjungi blog: <a href='https://syahandrianeda.blogspot.com' target='_blank'>Blog Pribadi</a> atau <a href='https://www.sdnratujaya1.net/' target='_blank'> Web Sekolah</a> ");
@@ -276,6 +277,7 @@ function tombolkirimnilaielamaso() {
     var res = KoleksiFormSiswa(namaform);
     //var kirimdataini = encodeURIComponent(JSON.stringify(res.data));
     var kirimdataini = new URLSearchParams(res.data);
+
     var usersekolah = keysekolah.innerHTML
     var alt_url;
     if (usersekolah == "SDN Ratujaya 1") {
@@ -531,8 +533,8 @@ function hasilakhirelamaso() { // untuk tipe berkali-kali (bukan type token akse
         ceknilai();
         //--------------htmlnilaisiswa(); --------------------
         var teksarea = document.getElementById("tekshtmlnilai");
-        var isiteks = document.getElementById("borderidhasilakhirnama")
- var teksbtoa = encodeURIComponent(isiteks.innerHTML);
+        var isiteks = document.getElementById("borderidhasilakhirnama");
+        var teksbtoa = encodeURIComponent(isiteks.innerHTML);
 
         teksarea.textContent = window.btoa(unescape(encodeURIComponent(isiteks.innerHTML)));
         resumenilai.style.display = "none";
@@ -1379,9 +1381,9 @@ function brkline(teks) { //coba
             var idopsi = arpg[0]; // hasilnya: 1A
             //var abjad = idopsi.slice(1, 2); // hasilnya A
             //var nosoal = idopsi.slice(0, 1); // hasilnya 1
-             var nosoal = parseInt(idopsi);
+            var nosoal = parseInt(idopsi);
             var abjad = idopsi.replace(nosoal, "");
-            
+
             if (abjad === "A") {
                 opsipg += "<hr style='border-top:1px solid olive'/>";
                 opsipg += "<ol style='list-style-type:upper-alpha;margin:5px 5px 0px 20px;padding:0' ><li><input class='calc' type='radio' style='display:none' name='soal" + nosoal + "' id='" + idopsi + "'/><label class='opsi' for='" + idopsi + "'>"; // Khusus opsi A, ada elemen OL lalu dilanjut teksnya
@@ -1812,7 +1814,7 @@ function kliklamaso() {
 
                 var teksaksesbersyarat;
                 if (Taksessiswa == "sekali") {
-                    var splitTidtgl = lentanggal(TcrtToken).split("/")
+                    var splitTidtgl = lentanggal("" + TcrtToken + "").split("/")
                     var tgldata = new Date(splitTidtgl[1] + "-" + splitTidtgl[0] + "-" + splitTidtgl[2] + " 00:00:00");
                     var tgldataend = new Date(splitTidtgl[1] + "-" + splitTidtgl[0] + "-" + splitTidtgl[2] + " 23:59:00");
                     var tglsekarang = new Date();
@@ -1841,6 +1843,7 @@ function kliklamaso() {
 
                 mainlogin.style.display = "none";
                 kontenLamaso.style.display = "block";
+                divdaftarnilai.style.display = "none";
 
                 cek.innerHTML = "";
 
@@ -1959,6 +1962,7 @@ function kliklamaso() {
 
                 mainlogin.style.display = "none";
                 kontenLamaso.style.display = "block";
+                divdaftarnilai.style.display = "none";
 
                 cek.innerHTML = "";
 
@@ -2134,6 +2138,7 @@ function logoutgantireload() {
     //tes.style.display = "block"
     w3_close();
 }
+
 function daftarnilai() {
     mainlogin.style.display = "none";
     kontenLamaso.style.display = "none";
