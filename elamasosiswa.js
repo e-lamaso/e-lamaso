@@ -534,7 +534,7 @@ function hasilakhirelamaso() { // untuk tipe berkali-kali (bukan type token akse
         var isiteks = document.getElementById("borderidhasilakhirnama")
  var teksbtoa = encodeURIComponent(isiteks.innerHTML);
 
-        teksarea.textContent = window.btoa(teksbtoa); //window.btoa(isiteks.innerHTML);
+        teksarea.textContent = window.btoa(unescape(encodeURIComponent(isiteks.innerHTML)));
         resumenilai.style.display = "none";
         //----------------------------------------------------
         var belumadatombol = document.getElementById("idtombolkirimnilaielamaso")
