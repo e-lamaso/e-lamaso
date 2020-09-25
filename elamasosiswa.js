@@ -16,7 +16,7 @@ $(document).ready(function () {
     kontenLamaso.style.display = "none";
     hasilbelajarsekali.style.display = "none";
     hasilakhir.style.display = "none";
-
+    divdaftarnilai.style.display = "none"
 
     var hcpt = document.getElementById("hakcipta");
     if (hcpt == null) {
@@ -2133,4 +2133,315 @@ function logoutgantireload() {
     //tekshtmlnilai.value = ""
     //tes.style.display = "block"
     w3_close();
+}
+function daftarnilai() {
+    mainlogin.style.display = "none";
+    kontenLamaso.style.display = "none";
+    divdaftarnilai.style.display = "block"
+    w3_close();
+
+
+
+}
+
+function getdaftarnilai() {
+    // ---- CARI DATA BERDASARKAN TABEL ID "tabel_riwayat_materi", yang dicari adalah:
+    // -- 1: Token, 
+    //bersihkan dulu tempatnya;
+    alert("Data ini muncul dengan benar hanya setelah Ananda mengerjakan belajar")
+    datasiswatoken.innerHTML = "";
+
+    var caritokenini = document.getElementById("getidtoken").value;
+    var url = script_url2 + "?action=riwayatmateri"
+    var mapeljson, pgjson, essayjson;
+    $.getJSON(url, function (json) {
+        console.log(json)
+        for (i = 0; i < json.records.length; i++) {
+            if (json.records[i].idtoken == caritokenini) {
+                mapeljson = json.records[i].idmapel;
+                pgjson = json.records[i].jumlahpg;
+                essayjson = json.records[i].jumlahessay;
+                //break;
+            }
+        }
+
+
+        // // var sumbertabel = document.getElementById("tabel_riwayat_materi");
+        // // if (sumbertabel == null) {
+        // //     alert("Kami Arahkan untuk membaca Riwayat Materi yang Anda buat. Tujuannya untuk mengenali token yang Anda isi");
+        // //     pembelajaran()
+        // // } else {
+        // //     //var jumlahbarissumbertabel = sumbertabel.rows.length;
+        // //     for (a = 0; a < sumbertabel.rows.length; a++) {
+        // //         if (sumbertabel.rows[a].cells[2].innerHTML == caritokenini) {
+        // //             var barisyangdicari = a
+        // //         }
+        // //     }
+
+        //--------- AMBIL DATATOKEN DULU DAN MENYEDIAKAN ID UNTUK JUMLAHSOAL PG DAN ESSAY-----------
+        var tabeldatatoken = document.createElement("table");
+        tabeldatatoken.setAttribute("class", "versi-table");
+        tabeldatatoken.setAttribute("id", "tabel_data_token");
+        var tr = tabeldatatoken.insertRow(-1);
+        var td = tr.insertCell(-1);
+        td.innerHTML = "Token"
+        var td = tr.insertCell(-1);
+        td.innerHTML = caritokenini; //sumbertabel.rows[barisyangdicari].cells[2].innerHTML
+        var tr = tabeldatatoken.insertRow(-1);
+        var td = tr.insertCell(-1);
+        td.innerHTML = "Mata Pelajaran/Tema"
+        var td = tr.insertCell(-1);
+        td.innerHTML = mapeljson; //sumbertabel.rows[barisyangdicari].cells[4].innerHTML
+        var tr = tabeldatatoken.insertRow(-1);
+        var td = tr.insertCell(-1);
+        td.innerHTML = "Jumlah Soal PG"
+        var td = tr.insertCell(-1);
+        td.innerHTML = pgjson; //sumbertabel.rows[barisyangdicari].cells[7].innerHTML
+        var tr = tabeldatatoken.insertRow(-1);
+        var td = tr.insertCell(-1);
+        td.innerHTML = "Jumlah Soal Essay"
+        var td = tr.insertCell(-1);
+        td.innerHTML = essayjson; //sumbertabel.rows[barisyangdicari].cells[8].innerHTML
+
+        datatoken.innerHTML = "<h4>Data Token</h4>";
+        datatoken.appendChild(tabeldatatoken);
+    })
+    //var jumlahsoalpg = pgjson; //sumbertabel.rows[barisyangdicari].cells[7].innerHTML
+
+    // //--------- AMBIL DAFTAR SISWA SESUAI DENGAN DATA TABEL SISWA -----------//
+
+    // // ------ DATA DIBUAT DALAM BENTUK JSON SCRIPT -----------------
+    // var kelaslogin = document.getElementById("kelassayapilih").innerHTML;
+    // var sumberkelasnama = document.getElementsByClassName("koleksinamakelas" + kelaslogin);
+
+    var tabeldatanilai = document.createElement("table");
+    tabeldatanilai.setAttribute("id", "tabel_data_nilai");
+    tabeldatanilai.setAttribute("class", "versi-table")
+    tabeldatanilai.setAttribute("style", "border-collapse:collapse;border:1px solid black");
+    var tr = tabeldatanilai.insertRow(-1)
+    var th1 = document.createElement("th");
+    th1.innerHTML = "No.";
+    var th2 = document.createElement("th");
+    th2.innerHTML = "Nama Siswa";
+    tr.appendChild(th1);
+    tr.appendChild(th2);
+
+    var jumlahsoalPG = pgjson; //tabel_data_token.rows[2].cells[1].innerHTML
+    if (jumlahsoalPG !== "") { //Jika tidak ada PG maka ga usah bikin kolom 
+        var th3 = document.createElement("th");
+        th3.innerHTML = "Skor PG";
+        tr.appendChild(th3);
+    }
+    var jumlahsoalEssay = essayjson; // tabel_data_token.rows[3].cells[1].innerHTML
+    if (jumlahsoalEssay !== "") {
+        var th4 = document.createElement("th");
+        th4.innerHTML = "Skor Essay";
+        tr.appendChild(th4);
+    }
+    var th5 = document.createElement("th");
+    th5.innerHTML = "Jumlah Nilai";
+    tr.appendChild(th5);
+
+    var sumberkelasnama = document.getElementById("previewpilihnama").children;
+    for (var i = 1; i < sumberkelasnama.length; i++) {
+        var brs = tabeldatanilai.insertRow(-1);
+        var cell1 = brs.insertCell(-1);
+        cell1.innerHTML = i;
+        var cell1 = brs.insertCell(-1);
+        cell1.innerHTML = sumberkelasnama[i].value
+        var namasiswaini = sumberkelasnama[i].value
+
+        //PG 
+        var jumlahsoalPG = pgjson; //tabel_data_token.rows[2].cells[1].innerHTML
+        if (jumlahsoalPG !== "") { //Jika tidak ada PG maka ga usah bikin kolom 
+            var cell1 = brs.insertCell(-1);
+            cell1.innerHTML = "<i class='fa fa-spin fa-spinner'></i>"
+        }
+        //essay
+        var jumlahsoalEssay = essayjson; //tabel_data_token.rows[3].cells[1].innerHTML
+        if (jumlahsoalEssay !== "") {
+            var cell1 = brs.insertCell(-1);
+            cell1.innerHTML = "'-";
+        }
+        var cell1 = brs.insertCell(-1);
+        cell1.innerHTML = "'-"
+    }
+
+
+
+    // // ----- tabel analisis PG 
+    // var jumlahsoalPG = tabel_data_token.rows[2].cells[1].innerHTML;
+    // if (jumlahsoalPG !== "") {
+    //     var tabelanalisispg = document.createElement("table");
+    //     tabelanalisispg.setAttribute("id", "tabel_data_analisis");
+    //     tabelanalisispg.setAttribute("class", "table2excel versii-table")
+    //     tabelanalisispg.setAttribute("style", "border-collapse:collapse;border:1px solid black");
+    //     tabelanalisispg.setAttribute("data-tableName", "Test Table 1")
+    //     //data-tableName="Test Table 1"
+    //     var tr = tabelanalisispg.insertRow(-1)
+    //     var th1 = document.createElement("th");
+    //     th1.setAttribute("rowspan", "2");
+    //     th1.innerHTML = "No.";
+    //     var th2 = document.createElement("th");
+    //     th2.setAttribute("rowspan", "2");
+    //     th2.innerHTML = "Nama Siswa";
+    //     var th3 = document.createElement("th");
+    //     th3.setAttribute("rowspan", "2");
+    //     th3.innerHTML = "Skor PG";
+    //     var th4 = document.createElement("th");
+    //     th4.setAttribute("colspan", jumlahsoalpg);
+    //     th4.innerHTML = "Pilihan Ganda";
+    //     var th5 = document.createElement("th");
+    //     th5.setAttribute("colspan", jumlahsoalpg)
+    //     th5.innerHTML = "Nilai Tiap PG"
+
+    //     tr.appendChild(th1);
+    //     tr.appendChild(th2);
+    //     tr.appendChild(th3);
+    //     tr.appendChild(th4);
+    //     tr.appendChild(th5);
+
+
+
+    //     var tr2 = tabelanalisispg.insertRow(-1)
+    //     //var tdkosong = tr2.insertCell(-1);
+    //     //var tdkosong = tr2.insertCell(-1);
+    //     //var tdkosong = tr2.insertCell(-1);
+    //     for (var j = 0; j < jumlahsoalpg; j++) {
+    //         var th7 = document.createElement("th");
+    //         th7.innerHTML = (j + 1);
+    //         tr2.appendChild(th7);
+    //     }
+    //     for (var j = 0; j < jumlahsoalpg; j++) {
+    //         var th8 = document.createElement("th");
+    //         th8.innerHTML = (j + 1);
+    //         tr2.appendChild(th8);
+    //     }
+
+    //     for (var i = 0; i < sumberkelasnama.length; i++) {
+    //         var brs = tabelanalisispg.insertRow(-1);
+    //         var p = i % 17;
+    //         var cell1 = brs.insertCell(-1);
+    //         if (p == 0) {
+    //             cell1.setAttribute("style", "break-after:page")
+    //         };
+    //         cell1.innerHTML = (i + 1);
+    //         var cell1 = brs.insertCell(-1);
+    //         cell1.innerHTML = sumberkelasnama[i].innerHTML;
+
+    //         var cell1 = brs.insertCell(-1);
+    //         //cell1.innerHTML = "<i class='fa fa-spin fa-spinner'></i>"
+
+    //         for (var j = 0; j < jumlahsoalpg; j++) {
+    //             //var tr2 = tabelanalisispg.insertRow(-1)
+    //             var cell1 = brs.insertCell(-1);
+    //             //cell1.innerHTML = "P" + (j+1)
+    //         }
+    //         for (var j = 0; j < jumlahsoalpg; j++) {
+    //             //var tr2 = tabelanalisispg.insertRow(-1)
+    //             var cell1 = brs.insertCell(-1);
+    //             //cell1.innerHTML = "SkorPG_" + (j+1)
+    //         }
+
+    //     }
+
+    //     // -- SELESAI TABEL ANALISIS PG
+
+    var url = script_url2 + "?action=respon_nilai"
+    $.getJSON(url, function (json) {
+        //menentukan idheaderguru
+        var dataheader = [];
+        var dataskor = []
+        for (t in json.records[0]) {
+            if (t.indexOf("PG_") > -1) {
+                dataheader.push(t)
+            };
+            if (t.indexOf("SKOR_") > -1) {
+                dataskor.push(t)
+            }
+        }
+
+        var baristabel = document.getElementById("tabel_data_nilai").rows
+        for (var a = 1; a < baristabel.length; a++) {
+            baristabel[a].cells[2].innerHTML = "";
+            var x = baristabel[a].cells[1].innerHTML
+
+            for (var b = 0; b < json.records.length; b++) {
+                //if(json.records[b].namasiswa == x){
+                if (json.records[b].namasiswa == x && json.records[b].idtoken == caritokenini) {
+                    baristabel[a].cells[2].innerHTML = (json.records[b].nilaiPG).replace(".", ",");
+                    baristabel[a].cells[3].innerHTML = "";
+                    var adanilaiessay = (json.records[b].nilaiEssay).replace(".", ",");
+                    if (adanilaiessay == "") {
+                        //var btn = document.createElement("button")
+                        //btn.setAttribute("onclick", "koreksiessay('" + b + "<|>" + json.records[b].html_jawaban + "')")
+                        //btn.innerHTML = "Beri Nilai"
+                        baristabel[a].cells[3].innerHTML = "Sedang dikoreksi"
+                        //baristabel[a].cells[3].appendChild(btn)
+                    } else {
+                        baristabel[a].cells[3].innerHTML = adanilaiessay;
+                        baristabel[a].cells[4].innerHTML = (((json.records[b].nilaiPG * 1 + json.records[b].nilaiEssay * 1) / 2).toFixed(2)).replace(".", ",");
+
+                    }
+                }
+
+            }
+        }
+
+        var baristabelanalisis = document.getElementById("tabel_data_analisis").rows
+        for (a = 0; a < json.records.length; a++) {
+            var namasiswajson = json.records[a].namasiswa;
+            for (b = 2; b < baristabelanalisis.length; b++) {
+                var namasiswatabel = baristabelanalisis[b].cells[1].innerHTML
+                if (namasiswajson == namasiswatabel && json.records[a].idtoken == caritokenini) {
+                    baristabelanalisis[b].cells[2].innerHTML = (json.records[a].nilaiPG).replace(".", ",");
+                    var indekskorpg = (parseInt(jumlahsoalpg) + 3)
+                    for (c = 0; c < jumlahsoalpg; c++) {
+                        baristabelanalisis[b].cells[c + 3].innerHTML = json.records[a][dataheader[c]];
+                        baristabelanalisis[b].cells[c + indekskorpg].innerHTML = json.records[a][dataskor[c]]
+                    }
+                }
+                //baristabelanalisis[b].cells[2].innerHTML ="";
+            }
+        }
+
+        //datasiswatoken.innerHTML = json.records[0].namasiswa;
+        //console.log(myJson);
+    })
+
+    datasiswatoken.innerHTML = "<h4>Tabel Analisis Nilai</h4>";
+    // var excel = document.createElement("button");
+    // excel.setAttribute("onclick", "tombollain2()");
+    // excel.innerHTML = "<i class='fa fa-file-excel-o'></i> Simpan ke Ms. Excel"
+    // datasiswatoken.appendChild(excel);
+
+    //     var print = document.createElement("button");
+    //     print.setAttribute("onclick", "printanalisis2()")
+    //     print.innerHTML = "<i class='fa fa-print'></i> Print"
+
+    //     datasiswatoken.innerHTML += " ";
+    //     datasiswatoken.appendChild(print);
+    datasiswatoken.innerHTML += "<hr/>"
+    datasiswatoken.appendChild(tabeldatanilai)
+
+    //     datasiswatoken.innerHTML += "<h4>Tabel Analisis Pilihan Ganda</h4>";
+    //     var excel = document.createElement("button");
+    //     excel.setAttribute("onclick", "tombollain()");
+    //     excel.innerHTML = "<i class='fa fa-file-excel-o'></i> Simpan ke Ms. Excel"
+    //     datasiswatoken.appendChild(excel);
+
+    //     var print = document.createElement("button");
+    //     print.setAttribute("onclick", "printanalisis()")
+    //     print.innerHTML = "<i class='fa fa-print'></i> Print"
+
+    //     datasiswatoken.innerHTML += " ";
+    //     datasiswatoken.appendChild(print);
+    //     datasiswatoken.innerHTML += "<hr/>"
+    //     datasiswatoken.appendChild(tabelanalisispg)
+    //     //<button class="exportToExcel">Export to XLS</button>
+    //     //var konsol = array_idpg()
+    //     //console.log(konsol);
+    // }
+    // document.getElementById("judulpetunjuk").innerHTML = "";
+    // document.getElementById("isipetunjuk").innerHTML = "";
 }
