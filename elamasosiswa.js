@@ -288,7 +288,7 @@ function tombolkirimnilaielamaso() {
     }
 
     var url = alt_url + "?action=siswakirimnilai"; // + kirimdataini;
-    var xhr = new XMLHttpRequest
+    var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true)
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
