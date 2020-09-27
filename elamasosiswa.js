@@ -16,7 +16,7 @@ $(document).ready(function () {
     kontenLamaso.style.display = "none";
     hasilbelajarsekali.style.display = "none";
     hasilakhir.style.display = "none";
-    divdaftarnilai.style.display = "none";
+    divdaftarnilai.style.display = "none"
 
 
     var hcpt = document.getElementById("hakcipta");
@@ -290,6 +290,7 @@ function tombolkirimnilaielamaso() {
     var url = alt_url + "?action=siswakirimnilai"; // + kirimdataini;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
+    //xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
@@ -303,6 +304,22 @@ function tombolkirimnilaielamaso() {
     // url encode form data for sending as post data
 
     xhr.send(kirimdataini);
+    // const url = alt_url + "?action=siswakirimnilai"; //+ kirimdataini;
+    // const opsi = {
+    //     method: "POST",
+    //     mode: 'no-cors',
+    //     headers: new Headers({
+    //         "Content-Type": "application/json"
+    //     }),
+    //     body: JSON.stringify(res.data)
+
+    // }
+    // fetch(url, opsi)
+    //     .then(response => response.json())
+    //     .then(response => {
+    //         tescekelement.innerHTML = "Terima Kasih, Ananda telah menyelesaikan pembelajaran ini dengan hasil:<br/>Skor PG = " + nilaiPGku.innerHTML + " tes " +
+    //             response;
+    //     })
 }
 
 function tombolkirimnilaielamasoGAGAL() {
@@ -534,9 +551,9 @@ function hasilakhirelamaso() { // untuk tipe berkali-kali (bukan type token akse
         //--------------htmlnilaisiswa(); --------------------
         var teksarea = document.getElementById("tekshtmlnilai");
         var isiteks = document.getElementById("borderidhasilakhirnama");
-        var teksbtoa = encodeURIComponent(isiteks.innerHTML);
+        var teksbtoa = encodeURI(isiteks.innerHTML); //var teksbtoa = encodeURIComponent(isiteks.innerHTML);
 
-        teksarea.textContent = window.btoa(unescape(encodeURIComponent(isiteks.innerHTML)));
+        teksarea.textContent = window.btoa(teksbtoa); //decodeURI(encodeURIComponent(isiteks.innerHTML)));
         resumenilai.style.display = "none";
         //----------------------------------------------------
         var belumadatombol = document.getElementById("idtombolkirimnilaielamaso")
