@@ -1723,8 +1723,8 @@ function katajadireplace(asal) {
             var splitteks = splitTeks[i].replace("_OPSI-SEL_", "").split(" ");
             var id = splitteks[0]; //4A
 
-            var abjad = id.slice(1, 2); //B
-            var nosoal = id.slice(0, 1); //nosoal 4
+            var abjad = id.substring(id.length - 1, id.length);//id.slice(1, 2); //B
+            var nosoal = id.match(/(\d+)/)[0];//id.slice(0, 1); //nosoal 4
             var innteks = "<input class='calc' type='radio' style='display:none' name='soal" + nosoal + "' id='" + id + "'/><label class='opsi' for='" + id + "'>" + abjad + "</label>"
 
             katajadi += innteks;
